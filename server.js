@@ -5,6 +5,7 @@ let io = require('socket.io')(server);
 let stream = require('./ws/stream');
 let path = require('path');
 let compression = require('compression')
+const dotenv = require('dotenv')
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
@@ -17,7 +18,7 @@ app.get('/', (req, res)=>{
 
 
 io.of('/stream').on('connection', stream);
-
-server.listen(3000, ()=>{
+const port = process.env.PORT;
+server.listen(port, ()=>{
     console.log('Server Starts listening on port 3000');
 });
