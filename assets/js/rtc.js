@@ -8,8 +8,8 @@ window.addEventListener('load', ()=>{
     const room = h.getQString(location.href, 'room');
     const username = sessionStorage.getItem('username');
     
-    console.log('Room: ', room);
-    console.log('UserName : ', username);
+    // console.log('Room: ', room);
+    // console.log('UserName : ', username);
 
     if(!room){
         document.querySelector('#room-create').attributes.removeNamedItem('hidden');
@@ -20,19 +20,19 @@ window.addEventListener('load', ()=>{
     }
 
     else{
-        console.log('in the Rtc Function:');
+        // console.log('in the Rtc Function:');
         let commElem = document.getElementsByClassName('room-comm');
-        console.log('commElem : ', commElem);
+        // console.log('commElem : ', commElem);
 
         for(let i = 0; i < commElem.length; i++){
-            console.log('commElem : ', commElem);
+            // console.log('commElem : ', commElem);
             commElem[i].attributes.removeNamedItem('hidden');
         }
 
         var pc = [];
 
         let socket = io('/stream');
-        console.log('socket : ', socket);
+        // console.log('socket : ', socket);
 
         var socketId = '';
         var myStream = '';
@@ -40,27 +40,27 @@ window.addEventListener('load', ()=>{
         socket.on('connect', ()=>{
             //set socketId
             socketId = socket.io.engine.id;
-            console.log('socketId : ', socketId);
+            // console.log('socketId : ', socketId);
 
             socket.emit('subscribe', {
                 room: room,
                 socketId: socketId
             });
             
-            console.log('After Emitting socket to room and socketID');
+            // console.log('After Emitting socket to room and socketID');
 
             socket.on('new user', (data)=>{
-                console.log('entering the new User into the socket');
+                // console.log('entering the new User into the socket');
                 socket.emit('newUserStart', {to:data.socketId, sender:socketId});
                 pc.push(data.socketId);
-                console.log('data.socketID : ', data.socketId)
+                // console.log('data.socketID : ', data.socketId)
                 init(true, data.socketId);
             });
 
 
             socket.on('newUserStart', (data)=>{
                 pc.push(data.sender);
-                console.log(' in the new UserStart data.sender : ', data.sender)
+                // console.log(' in the new UserStart data.sender : ', data.sender)
                 init(false, data.sender);
             });
 
@@ -127,7 +127,7 @@ window.addEventListener('load', ()=>{
 
         function init(createOffer, partnerName){
             pc[partnerName] = new RTCPeerConnection(h.getIceServer());
-            console.log('pc[partnerName] : ', pc[partnerName]);
+            // console.log('pc[partnerName] : ', pc[partnerName]);
             h.getUserMedia().then((stream)=>{
                 //save my stream
                 myStream = stream;

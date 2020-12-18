@@ -47,7 +47,7 @@ window.addEventListener('load', ()=>{
 
             //save the user's name in sessionStorage
             sessionStorage.setItem('username', yourName);
-            console.log(sessionStorage.name);
+            // console.log(sessionStorage.name);
             //create room link
             let roomLink = `${location.origin}?room=${roomName.trim().replace(' ', '_')}_${helpers.generateRandomString()}`;
 

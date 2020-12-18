@@ -20,7 +20,7 @@ export default {
         url = url ? url : location.href;
         let queryStrings = decodeURIComponent(url).split('#', 2)[0].split('?', 2)[1];
         
-        console.log("query String is: ", queryStrings);
+        // console.log("query String is: ", queryStrings);
         if(queryStrings){
             let splittedQStrings = queryStrings.split('&');
             
