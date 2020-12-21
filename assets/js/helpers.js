@@ -54,9 +54,7 @@ export default {
         if(this.userMediaAvailable()){
             return navigator.mediaDevices.getUserMedia({
                 video: true, 
-                audio: {
-                    echoCancellation: true
-                }
+                audio: true,
             });
         }
 

@@ -14,11 +14,10 @@ app.use(compression());
 app.get('/', (req, res)=>{
     res.sendFile(__dirname+'/index.html');
 });
-
-
+dotenv.config({ path: './config.env'})
 
 io.of('/stream').on('connection', stream);
 const port = process.env.PORT;
 server.listen(port, ()=>{
-    console.log('Server Starts listening on port 3000');
+    console.log(`Server Starts listening on port: ${port}`);
 });
